@@ -1,0 +1,840 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>C</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="182b4392-0286-8025-9958-dd24338a2f6b" class="page sans"><header><h1 class="page-title">C</h1><p class="page-description"></p></header><div class="page-body"><h3 id="182b4392-0286-80d6-9f2e-f005ae28279f" class="">Proceso de compilación</h3><p id="182b4392-0286-80c5-813d-f222d6e50539" class="">Compila  →  Enlaza →  Programa.exe</p><hr id="182b4392-0286-807d-a5ee-cb2f62d36aa1"/><h1 id="182b4392-0286-8035-90a1-e1a44295d17a" class="">Algoritmo</h1><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="182b4392-0286-80bd-849e-dbcfe9642f53"><div style="width:100%"><blockquote id="4e62641c-8e9f-481f-9767-e6f50055c22f" class="">Siempre el algoritmo tiene que estar en dentro de:</blockquote><p id="78d2f9ea-56d5-4a09-a0cc-30ffa78c0d29" class="">int main(){</p><p id="670681f1-8c85-438f-8fff-0293e91eb008" class="">
+</p><p id="b3c02f00-304f-4e6c-85c5-2af92d36433a" class="">}</p></div></figure><h2 id="182b4392-0286-80e2-8720-c41aa819acba" class="">Printf(”Hello world”);</h2><p id="182b4392-0286-80ba-9aef-f66e7bee7cdb" class="">Sirve para que el programa escriba en la terminal “Hello world”</p><p id="182b4392-0286-800e-bd3b-ef289b790be4" class=""><strong>Necesitas la librería </strong><code><strong>#include &lt;stdio.h&gt;</strong></code><strong> </strong></p><h3 id="182b4392-0286-80fd-bda1-ed2a5a02fbb7" class="">Salto de linea</h3><p id="182b4392-0286-80b2-9189-ebc960351678" class=""><code>\n</code> </p><h3 id="189b4392-0286-801b-b4f6-d450f2d5ed13" class="">Tabular</h3><p id="189b4392-0286-80c3-b9e4-c5f06d343ea7" class=""><code>\t</code></p><h3 id="182b4392-0286-808f-b976-e55c9e698ab2" class="">Representar variables</h3><div id="182b4392-0286-80a3-b556-c900c7e32c6c" class="column-list"><div id="182b4392-0286-80df-b463-fff877d8c830" style="width:50%" class="column"><p id="182b4392-0286-80ee-9322-cbd57918a029" class=""><code>printf(&quot;%d&quot;, a);</code></p></div><div id="182b4392-0286-8007-8398-c7923650f91e" style="width:50%" class="column"><p id="182b4392-0286-8029-b385-f8da846b93ce" class="">imprime decimal y se almacena en a</p></div></div><h3 id="183b4392-0286-8084-ac57-dbcbee966a6e" class="">Que no se cierre una pantalla hasta que pulses una tecla</h3><p id="183b4392-0286-8067-855f-fd1264576e18" class=""><code>getchar();</code> </p><h3 id="183b4392-0286-8061-9a5f-f812f31cc7e4" class="">Que se puedan representar ñ y tildes</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="183b4392-0286-8048-9c43-e2847ee5f7bd" class="code"><code class="language-C">#include &lt;windows.h&gt;
+int main ()
+{
+    SetConsoleCP(1252);
+    SetConsoleOutputCP(1252);
+    return 0;
+}
+</code></pre><h2 id="182b4392-0286-8099-89d3-f5cf5e1c3ad9" class="">Scanf(”%d”,&amp;a)</h2><div id="182b4392-0286-8021-96ed-c05b292bf20d" class="column-list"><div id="40908306-5c66-4d96-8156-a3ad1c11f2f5" style="width:50%" class="column"><p id="182b4392-0286-80c6-8cca-f1115bf680a1" class=""><code>Scanf(&quot;%d&quot;,&amp;a)</code> </p></div><div id="5fadb912-5849-440f-96ab-5a0287b88479" style="width:50%" class="column"><p id="03c8f50b-c366-4e2c-8fa0-2d83fa41ff7e" class="">Dice que será decimal y se almacena en a</p></div></div><h3 id="183b4392-0286-80af-9fca-ffb2792fc49f" class="">Limpiar el buffer</h3><p id="183b4392-0286-8061-81bb-c271c2b36a6c" class=""><code>while(getchar() != &#x27;\n&#x27;);</code></p><h3 id="18ab4392-0286-8009-b5cc-d3cda4929dc8" class="">Comprobar que lo que estas metiendo es valido</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="18ab4392-0286-803a-af4d-c5dab852720a" class="code"><code class="language-C">do{
+printf(&quot;Escriba su velocidad en Km/h: &quot;);
+    resul=scanf(&quot;%f&quot;, &amp;velocidad);
+    
+    while(getchar() != &#x27;\n&#x27;);
+
+}while (resul != 1 || velocidad &gt; 0);</code></pre><p id="182b4392-0286-8099-b893-e038ccc3ee68" class="">
+</p><hr id="182b4392-0286-80ea-aed8-dcdbd35af3f9"/><h1 id="191b4392-0286-809f-aef1-de6a4a5712d0" class="">Punteros</h1><p id="191b4392-0286-80d0-aa54-f112bfb1008e" class="">El puntero es una variable que apunta al valor de otra</p><div id="191b4392-0286-8061-ad86-f28443c622cf" class="column-list"><div id="191b4392-0286-8086-989c-d736c7e85fe1" style="width:50%" class="column"><h2 id="191b4392-0286-809e-823b-f1cccd4cb51c" class="">*</h2><p id="191b4392-0286-80a7-b4d3-eec1f1c964f9" class="">Cuando pones el asterisco haces que la variable sea un puntero</p></div><div id="191b4392-0286-8000-b757-f4e8c3b88304" style="width:50%" class="column"><h2 id="191b4392-0286-80be-8458-e7b675aac7a5" class="">&amp;</h2><p id="191b4392-0286-80c4-869c-cf154b0e1ef9" class="">En vez de dar la variable da su dirección de memoria</p></div></div><h1 id="182b4392-0286-8033-867b-ca7b0c1905fb" class="">Variables</h1><h3 id="18ab4392-0286-80e7-aaca-f03cc8382e39" class="">Hacer variables globales</h3><p id="18ab4392-0286-80a7-a536-fdbcf390144f" class="">Declarar la variable fuera de cualquier función o acción</p><h3 id="18ab4392-0286-80a4-8192-e848ea1f3f93" class="">Hacer variables ocultas</h3><p id="18ab4392-0286-80ef-8916-cf2f7e10173c" class="">Cuando vuelves a crear una variable la cual era global dentro de una acción o función</p><h2 id="182b4392-0286-8034-87ab-d70c72a90aac" class="">= …;</h2><p id="182b4392-0286-80d1-8500-de01a9e5b5f1" class="">Al usar un igual a la d derecha de una variable haces que lo que esté a su derecha sea su nuevo valor</p><h2 id="182b4392-0286-8028-aa3e-d5ec5ad6e143" class="">int</h2><div id="182b4392-0286-800f-8246-fb9abcde6942" class="column-list"><div id="629a3734-f71c-486d-b739-a8fee1ead5d4" style="width:50%" class="column"><p id="182b4392-0286-8094-baf8-efa169fafb20" class="">Es para usar números enteros , ocupa 4 bytes</p><p id="182b4392-0286-8079-bfd1-c2e599f41408" class="">No puede empezar con números</p><p id="189b4392-0286-8069-920a-c6dcb8eb0d36" class="">Para octal prefijo <code>0</code> y hex prefijo <code>0x</code></p></div><div id="37d882b0-f2c4-48ec-a046-447baba28e9d" style="width:50%" class="column"><p id="c0e94351-d604-4dd3-810a-092ebafb869a" class=""><code>int a;</code></p><p id="189b4392-0286-8000-af18-cbfec33fd4be" class="">Para llamarlo: <code>%d</code> o <code>%i</code> </p><p id="189b4392-0286-803a-912c-e1c665846a8e" class=""><code>%o</code> para octal y <code>%x</code> para hexadecimal</p></div></div><h2 id="182b4392-0286-8089-a09c-c1895ef7ec0d" class="">float</h2><div id="189b4392-0286-80ff-aa70-dafd22a09aec" class="column-list"><div id="189b4392-0286-80b7-ab70-d534f7c3aea0" style="width:50%" class="column"><p id="182b4392-0286-80cd-ab18-f7089104f96e" class="">Es para usar números decimales</p><p id="182b4392-0286-806a-8c5d-ceb35fd6b4a1" class="">Un número no es decimal si no tiene 2.0</p></div><div id="189b4392-0286-8051-8d6c-f29819bda4e8" style="width:50%" class="column"><p id="189b4392-0286-8093-9cd9-c039ce3fc0dc" class=""><code>float a;</code></p><p id="189b4392-0286-8001-b50f-fbee32507656" class="">Para llamarlo: <code>%f</code> </p></div></div><h2 id="182b4392-0286-80ed-be05-e654cb306daf" class="">double</h2><p id="189b4392-0286-80b5-88f5-ecd5e4c9412c" class="">Para llamarlo: <code>%lf</code> o <code>%g</code> para notación científica</p><p id="189b4392-0286-8081-a967-d77389d7bb7f" class="">IEEE 754 de doble precisión</p><h2 id="18ab4392-0286-8050-ba12-c3965a144e50" class="">Short </h2><p id="18ab4392-0286-800a-a07f-c48ca5203f6d" class="">Hace que la variable sea de 2 bytes</p><h2 id="182b4392-0286-8012-8ac2-c2a52e169a63" class="">long</h2><p id="189b4392-0286-80f6-9b24-cb2e1f3081eb" class="">Para llamar a un long double <code>%Lf</code> </p><p id="18ab4392-0286-8022-9f82-dba140915f40" class="">Los bytes serán 4*n, n es la cantidad de veces que repites el long</p><h2 id="182b4392-0286-8021-a529-c7df7ff93cab" class="">string</h2><p id="182b4392-0286-80bd-b849-ea2c5898279d" class="">Es para usar caracteres</p><p id="182b4392-0286-803d-ae8d-f904d905735d" class="">Necesitas la librería <code>#include &lt;string.h&gt;</code> </p><p id="190b4392-0286-80f9-a970-ca1536016da7" class="">Y con la librería y <code>strcpy(palabra1,palabra2);</code> Copia uno a otro </p><p id="182b4392-0286-8015-a463-f889913945f1" class="">Hay que tener cuidado pues al declararla tiene una longitud determinada que hay que tener cuidado con no sobrepasarla.</p><p id="189b4392-0286-80d0-aee1-c390e6f27650" class="">Se llama con <code>%s</code></p><h2 id="182b4392-0286-803b-b974-c508e070f016" class="">char</h2><div id="189b4392-0286-8028-be6e-f08d6a7ba38b" class="column-list"><div id="189b4392-0286-80d3-8cac-cfd749e750ff" style="width:50%" class="column"><p id="182b4392-0286-805a-9111-f0c1cb13f160" class="">Se usa entre ‘____’</p><p id="182b4392-0286-80b3-969b-d00b64bc0f02" class="">Para decir cuantos caracteres quieres tienes que poner [x] al final <code>char nombre[10];</code> , puedes escribir letras y al final te pone 0</p></div><div id="189b4392-0286-80e7-a0bd-ca6a062591c6" style="width:50%" class="column"><p id="189b4392-0286-80d6-b860-e1e71562c56a" class=""><code>char a;</code></p><p id="189b4392-0286-80c2-98d3-e5a4f268e12c" class="">Para llamarlo: <code>%c</code>  y <code>%s</code> para cadenas de caracteres </p></div></div><h1 id="19fb4392-0286-8044-a4fd-cf141c8f39cf" class="">Variables Dinámicas</h1><p id="19fb4392-0286-80f5-80b2-e8bc60838017" class="">malloc</p><p id="19fb4392-0286-80a4-b0f2-e62d46c4b570" class="">calloc</p><p id="19fb4392-0286-8063-a741-cd8c83b23a04" class="">realloc</p><p id="19fb4392-0286-80e5-9282-d98af1fc9617" class="">
+</p><h2 id="19fb4392-0286-808d-beb5-c3e3a1937b7c" class="">Liberarlas <code>free(variable);44</code></h2><p id="19fb4392-0286-80fa-a56b-cb8fe9a3b221" class="">
+</p><h1 id="182b4392-0286-8066-9498-e1faa1d38c23" class="">Constantes (ejs)</h1><p id="182b4392-0286-8018-b70d-fc75ccb80f66" class=""><code>const int N = 10;</code></p><p id="182b4392-0286-8087-831f-c644d809dc23" class=""><code>const int Distancia = int(&#x27;a&#x27;) -int(&#x27;A&#x27;)</code>; </p><h1 id="182b4392-0286-803e-8132-c76a6440fa07" class="">Cambiar tipo de variable</h1><p id="182b4392-0286-801e-9702-fec91ab67ae1" class="">Hacerla mas compleja se llama <strong><span style="border-bottom:0.05em solid">Promocionar</span></strong></p><p id="182b4392-0286-8039-a0b0-fce0011e386c" class="">int → float → double </p><p id="182b4392-0286-80f2-9715-fca2d2169bb5" class="">Hacerla más sencilla se llama <strong><span style="border-bottom:0.05em solid">Reducir</span></strong></p><p id="182b4392-0286-8076-9872-dda0253d393c" class="">double → float → int </p><h2 id="182b4392-0286-808c-b3c5-cc977d0fc805" class="">Conversión implícita</h2><p id="182b4392-0286-8073-8a6b-ca16679e5841" class=""> </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-8082-ab69-d7d347271ad6" class="code"><code class="language-C">int a;
+int c;
+float b;
+b=a; //conversión implícita
+float a = 2; //conversión implícita
+a=3.5;   //conversión implícita</code></pre><h2 id="182b4392-0286-80aa-b1f6-d7812d5a49c1" class="">Conversión explícita</h2><p id="182b4392-0286-80be-b44a-cdd2019ad927" class="">Especificas a que se transforma</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-800d-8b60-e06db4962387" class="code"><code class="language-C">int a;
+int c;
+float b;
+b= (int) a; //conversión explícita
+a= (int) 3.5;   //conversión explícita
+float a = 2; //conversión implícita</code></pre><h1 id="182b4392-0286-80d9-a553-dcde7362f3e9" class="">Tipos de Variables</h1><h3 id="182b4392-0286-8041-baa4-eefac9b42bbf" class="">Struct</h3><p id="182b4392-0286-804f-81ae-e10ec6744331" class="">Es una variable que dentro de ella hay varias, en este caso hemos hecho la variable punto que tiene abscisas  y ordenadas, definimos como se va a llamar este tipo de productos y como lo vamos a llamar (con <code>P</code>) </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-8095-8931-cd262bc59867" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+
+struct Punto {
+    float x;
+    float y;
+};
+
+int main() {
+    struct Punto punto1 = {3.5, 7.2};
+    
+    printf(&quot;Coordenadas del punto: (%.1f, %.1f)\n&quot;, punto1.x, punto1.y);
+
+    return 0;
+}</code></pre><h3 id="182b4392-0286-8016-829c-c1761dee3739" class="">Typedef</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-807b-9484-c43f5c15cb3b" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+
+typedef struct Punto{ //pongo aqui punto para poder hacer struct punto;
+    float x;
+    float y;
+} Punto; //que no se te olvide el final
+
+int main() {
+    Punto punto1 = {3.5, 7.2};
+    
+    printf(&quot;Coordenadas del punto: (%.1f, %.1f)\n&quot;, punto1.x, punto1.y);
+
+    return 0;
+}</code></pre><p id="182b4392-0286-806d-84a8-ca974a2a99ca" class="">Con este lo haces lo mismo pero a la hora de poner la variable no tienes que poner el struct</p><h1 id="189b4392-0286-8054-88f7-f3735d2fcc91" class="">Variables dinamicas </h1><h2 id="191b4392-0286-80b9-af0e-fd1b0eed38ea" class="">Como se declaran??</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="191b4392-0286-80a0-9e12-fb219b257753" class="code"><code class="language-C">#include &lt;stdlib.h&gt;
+int main(){
+char *l = malloc(sizeof(char))
+}</code></pre><hr id="189b4392-0286-804c-9a09-e1d63112b2ed"/><h1 id="182b4392-0286-805e-9525-e03af355d84b" class="">Tablas</h1><h2 id="182b4392-0286-8051-ac2c-eef801460909" class="">Una dimensión</h2><p id="182b4392-0286-807a-8818-f34174873abf" class=""><code>typedef float Vector[NColumnas];</code></p><p id="182b4392-0286-8018-93b2-fb709b609577" class="">Puedes también crear variables las cuales son Arrays</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-807e-a98b-d13221030740" class="code"><code class="language-C++">#include &lt;stdio.h&gt;
+
+int main() {
+    // Declaración e inicialización de un array de enteros
+    int numeros[5] = {10, 20, 30, 40, 50};
+
+    // Imprimir los valores del array
+    printf(&quot;Los valores del array son:\n&quot;);
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;numeros[%d] = %d\n&quot;, i, numeros[i]);
+    }
+
+    return 0;
+}</code></pre><p id="182b4392-0286-806a-9b93-c43d63dbf33e" class="">Para hacer una llamada a la tabla tienes que poner la columna que deseas entre corchetes y a la izquierda el nombre de la tabla, <code>t[i]</code> , aquí definimos una variable para que elijamos la columna</p><h2 id="182b4392-0286-801b-8261-ca302ec789f2" class="">Multidimensional</h2><p id="182b4392-0286-8021-a05f-fa39465aa254" class=""><code>typedef int Matriz[NFilas][NColumnas];</code></p><p id="182b4392-0286-80ab-be60-df91c51e5af9" class="">Es igual pero para llamar usamos  <code>tabla[i][j]</code></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-802a-adf7-c578a4c8eadc" class="code"><code class="language-C++">//inicializar la tabla
+Tipo_Tabla miTabla = {
+{12, 20, 16, 18, 21, 22, 18, 11, 12, 15},
+{14, 13, 9, 8, 20, 92, 13, 10, 21, 17},
+{15, 20, 26, 28, 21, 23, 28, 31, 26, 25},
+{22, 25, 36, 38, 41, 49, 58, 61, 62, 75},
+{13, 83, 26, 88, 23, 32, 81, 51, 42, 83},
+{11, 02, 16, 48, 31, 95, 58, 41, 33, 22},
+{14, 24, 46, 14, 41, 24, 48, 51, 15, 55},
+{15, 50, 66, 78, 11, 92, 8, 13, 22, 25},
+}; // ponemos cada fila entre llaves y unas llaves para toda la tabla</code></pre><h2 id="182b4392-0286-800a-8bd5-f7007200a3fe" class="">Randomizar una tabla</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-80bf-9bb5-d480e82096a7" class="code"><code class="language-C++">int main() {
+Temperaturas t;
+int i,j;
+for(i=0;i&lt;NANYO;i++){
+for(j=0;j&lt;NDIA;j++){
+t[i][j] = rand()%21+20;
+cout &lt;&lt; t[i][j] &lt;&lt; &quot; | &quot;;
+}
+cout &lt;&lt; endl;
+}</code></pre><h2 id="198b4392-0286-8006-8c55-f083dcd9b73d" class="">Contar</h2><hr id="182b4392-0286-8099-bf2e-d4aeb13795e1"/><h1 id="182b4392-0286-8079-bb5c-d9c4311f08e9" class="">Operadores</h1><h2 id="182b4392-0286-8025-9b18-e4ec1de3e4c4" class="">Suma y Resta ( +,  -  )</h2><p id="182b4392-0286-8053-83b8-fafc2ec39a98" class="">Si los números son enteros el resultado será entero, alguno es real será real el resultado.</p><h2 id="182b4392-0286-80ef-a69a-d113f723f53f" class="">Multiplicación ( * )</h2><p id="182b4392-0286-807e-af90-defd11118ed7" class="">Si los números son enteros el resultado será entero, alguno es real será real el resultado.</p><h2 id="182b4392-0286-80a0-847a-dccbb45b0da9" class="">DIV ( / )</h2><p id="182b4392-0286-8074-8d28-c994c63793d7" class="">Devuelve el resultado de la división sin decimales de una división</p><h2 id="182b4392-0286-803d-bfa6-fa78b583859a" class="">MOD ( % )</h2><p id="182b4392-0286-8020-92a6-f1bc48e23f28" class="">Devuelve el resto de la división</p><h2 id="182b4392-0286-8075-ab39-dd41b3abc412" class="">División normal ( / )</h2><p id="182b4392-0286-808b-9a16-e93f739a9ab8" class="">Te devuelve números reales</p><h2 id="182b4392-0286-8076-8591-ced89d2f1bf8" class="">&lt;&gt; = ≤ ≥ ≠</h2><p id="182b4392-0286-8058-a7c6-cd9efeb7e25a" class="">Devuelve booleanos es decir verdadero o falso</p><h2 id="182b4392-0286-80a0-8b28-f10f83e3bdcc" class="">Sucesor y Predecesor</h2><div id="182b4392-0286-8048-8795-e5809c5aebbc" class="column-list"><div id="5a667284-ab94-4227-aa90-3d560a86785e" style="width:50%" class="column"><h3 id="6c992526-0154-4564-adcb-76f9024775b4" class="">Sucesor (+1) <code>i++</code> </h3></div><div id="7817efe5-21bf-4888-b33e-e034cbc2a34d" style="width:50%" class="column"><h3 id="d8f86954-0226-46c0-aa75-f7ce236180d0" class="">Predecesor (-1) <code>i--</code></h3></div></div><h1 id="18ab4392-0286-80b2-8034-df10bf705a20" class="">Operadores complejos</h1><h2 id="18ab4392-0286-8043-b4c3-fb944f6a4cd2" class="">Redondeo</h2><p id="18ab4392-0286-8050-b78c-d508ec3d40da" class="">Hay que poner al principio: <code>#include &lt;cmath&gt;</code></p><p id="18ab4392-0286-808b-be86-fba72741fc37" class=""><code>floor(4.7) = 4.0</code> </p><h3 id="18ab4392-0286-8040-85b7-c1013ddc41cf" class="">Pow (elevar a algo)</h3><p id="18ab4392-0286-801a-9129-c02757aff6f9" class="">Hay que poner al principio: <code>#include &lt;cmath&gt;</code></p><p id="18ab4392-0286-8079-b0a7-f09ea0f3ac16" class="">Despues pones:  <code>pow(base, a_lo_que_elevas);</code></p><h2 id="18ab4392-0286-801e-bc90-f2d154c916df" class="">Sqr (elevar al cuadrado) </h2><p id="18ab4392-0286-8074-a900-d7f592afffe4" class="">Hay que poner al principio: <code>#include &lt;cmath&gt;</code></p><p id="18ab4392-0286-803f-8256-db7e1a3f796b" class="">Despues pones:  <code>sqr(base, a_lo_que_elevas);</code></p><p id="18ab4392-0286-8031-ac29-f39f310105ab" class="">
+</p><h2 id="18ab4392-0286-8060-8fa2-f00e06fb3179" class="">Sqrt (raiz cuadrada)</h2><p id="18ab4392-0286-80e1-9411-eaaeb3949c93" class="">Hay que poner al principio: <code>#include &lt;cmath&gt;</code></p><p id="18ab4392-0286-80ae-9663-fcb2139c5875" class="">Despues pones:  <code>sqrt(base, a_lo_que_elevas);</code></p><p id="18ab4392-0286-8063-ae99-da096254c04e" class="">
+</p><p id="18ab4392-0286-8071-b154-e5420f858674" class="">
+</p><hr id="182b4392-0286-803c-ae67-e4f9324bc644"/><h1 id="182b4392-0286-807e-9a63-c3162991dc28" class="">Análisis de casos </h1><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Operadores lógicos</summary><div class="indented"><h3 id="c638ddfe-6f2b-462a-b53b-9fedae5cdd7f" class="">Y = “&amp;&amp;”</h3><h3 id="b742fe98-0a57-4690-a8be-d25550f0298e" class="">Igual = “==”</h3><h3 id="cf63d956-e9f6-4d82-ba64-10b752fe1f77" class="">O = “||”</h3></div></details><h2 id="182b4392-0286-807a-bb4d-faa07050065e" class="">If</h2><p id="182b4392-0286-80fe-8ed4-caf2057934e8" class="">Sirve para que cuando pase algo la maquina haga otra cosa</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-8078-905c-f4c504362b16" class="code"><code class="language-C++">if (cond) {
+S
+}</code></pre><h2 id="182b4392-0286-80ab-bec2-c1a885884187" class="">Else</h2><p id="182b4392-0286-803b-9385-d5f04c869cba" class="">Es complementario del if, cuando no se produce el if se reproduce el <code>else</code></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-8027-8ee5-dc8f1d7fc32a" class="code"><code class="language-C++">if (cond) {
+S	
+}	 else {
+R	
+}	</code></pre><h2 id="182b4392-0286-8020-88b3-cd8d4839eefd" class="">Switch</h2><p id="182b4392-0286-8057-9ec7-d52a86accc60" class="">El switch sirve para elegir entre muchos casos</p><p id="182b4392-0286-806b-bc85-efe26c7e1541" class="">No se puede usar operadores lógicos</p><p id="182b4392-0286-8060-a2fe-ce3db1be8e12" class="">El default es muy importante pues es lo que hará si no le damos ningún input que requiera para darnos algo en especifico</p><p id="182b4392-0286-802a-8ab5-ea2e50441031" class=""><span style="border-bottom:0.05em solid">Si no pones el break se ejecutarán todos los de debajo del caso que tu elijas</span>, es decir si digo “B” me dirá lo que dice del B del C y el dafault</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-80ca-bdb9-fe34104f9297" class="code"><code class="language-C++">switch (PermisoConducir) {
+case &#x27;A&#x27;:
+cout &lt;&lt; &quot;Motocicletas y triciclos de motor&quot;;
+break;
+case &#x27;B&#x27; :
+cout &lt;&lt; &quot;Automóviles masa máxima autorizada &lt;= 3500 kg&quot;;
+break;
+case &#x27;C&#x27; :
+cout &lt;&lt; &quot; Automóviles masa máxima autorizada &gt; 3500 kg &quot;;
+break;
+default :
+cout &lt;&lt; &quot;No contemplado&quot;;
+break;
+}</code></pre><p id="189b4392-0286-8078-922d-e7edb26191d7" class="">
+</p><hr id="189b4392-0286-80ba-acb9-f3288d734123"/><h1 id="183b4392-0286-808d-958c-d9f03946391f" class="">Bucles</h1><p id="189b4392-0286-805d-9efa-fffe842a31dd" class="">Si solo tienen una orden no hace falta poner llaves</p><h2 id="183b4392-0286-80db-90dc-cbdc1f9c4e5e" class="">Break</h2><p id="183b4392-0286-8000-b627-d0558c3a38b5" class="">Se usa para para un bucle</p><p id="183b4392-0286-8029-b4a3-ee3c8ec6dccd" class="">Se puede usar </p><p id="183b4392-0286-8065-b67d-f9f16c967314" class=""><code>If (cond) break;</code></p><p id="183b4392-0286-80d4-8b4b-dcfc39ad198e" class="">o</p><p id="183b4392-0286-80ce-ba3b-ca5ba85713ff" class=""><code>Break;</code></p><h2 id="183b4392-0286-808e-b251-c6a6186aa903" class="">While</h2><p id="183b4392-0286-8032-9277-f78a414e92ae" class="">Se produce mientras la condición se cumpla, la condición se actualiza al principio, no al final</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="183b4392-0286-804a-a5eb-dff2a305567e" class="code"><code class="language-C++">while (cond) {
+S;
+}</code></pre><p id="183b4392-0286-8000-920f-c1a7c096272b" class="">
+</p><h2 id="183b4392-0286-80b3-9347-cea4dba27ead" class="">Do while</h2><p id="183b4392-0286-8092-867b-f026040ffef4" class="">Hacer mientras:  la comprobación se hace al final</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="183b4392-0286-809d-afb5-c67bb692d1fa" class="code"><code class="language-C++">int numero;
+do
+{
+
+    ...
+
+} while(numero &lt;= 100); //comprueba al final</code></pre><p id="183b4392-0286-8006-84cb-f2232258b107" class="">
+</p><h2 id="183b4392-0286-80a2-a478-cf9d24d0a97a" class="">for</h2><p id="183b4392-0286-8021-8d76-f775883d2aef" class="">Esto es realmente un while donde al principio decimos cuanto vale i, despues le decimos que mientras i sea menos o igual que b se siga ejecutando y por ultimo le decimos cuanto va a ir subiedo que va a ser uno por uno</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="183b4392-0286-80ce-99ef-cfb273e8a0c6" class="code"><code class="language-C++">for (i = a; i&lt;=b; i++){
+	S;
+}</code></pre><p id="183b4392-0286-80e9-8622-eae5173ddd5a" class="">Esto es lo mismo que:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="183b4392-0286-807d-a9fe-fced36d3e130" class="code"><code class="language-C++">i=a;
+while (i&lt;= b){
+S;
+i++;
+}</code></pre><p id="183b4392-0286-8074-81be-c8dd0a732563" class="">
+</p><hr id="182b4392-0286-8051-9fe4-eb21c8b92cae"/><h1 id="182b4392-0286-809b-89d2-fa6a68b0aa34" class="">Funciones</h1><p id="182b4392-0286-80c6-8760-ea8a52092c43" class="">Hay variables de entrada y uno de salida</p><p id="182b4392-0286-8023-bb9b-dc25775ae043" class="">Lo que quieres que salga es lo que va después del <code>return</code></p><p id="182b4392-0286-80ca-8e8e-dc2c6bedd0ef" class="">Las funciones pueden devolver solo una variable y no la devuelven de vuelta como tal, simplemente haces que se produzca una operación entonces si quieres guardarte el resultado de una función en una variable tendrás que poner: <code>max = Max2(500,200);</code></p><p id="191b4392-0286-8075-968c-c2bf88f89f3f" class="">Si ponemos <code>*</code> en la función en vez de que sea solo un nombre y despues al llamarla tambien le ponemos un <code>&amp;</code> al lado de la variable(<code>&amp;</code>) la variable cambia dentro de la funcion y fuera</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-8035-a8af-eab1732bf5ac" class="code"><code class="language-C">int sumar(int a, int b) {
+    return a + b;
+}
+resultado = sumar(num1, num2);</code></pre><h2 id="182b4392-0286-8013-89c8-f64eba50143f" class="">Crear variables que se inicializan una vez</h2><p id="189b4392-0286-802b-9faf-e151675adfe9" class=""><code>static int cuenta = 0; </code> </p><p id="189b4392-0286-80e0-b4b0-c91016734fa7" class="">
+</p><hr id="182b4392-0286-80ed-ac8e-f8f263e84c3b"/><h1 id="182b4392-0286-806a-9268-d8248f84ff85" class="">Acciones</h1><p id="182b4392-0286-806c-86a6-ce2b6d347cef" class="">Se representan con un <code>void &quot;nombre&quot;(variables){…      }</code></p><p id="182b4392-0286-80ef-b0bc-d91e57abfa89" class="">Se declara encima de main</p><p id="182b4392-0286-8072-858e-c54142a87f19" class="">Si pones <code>*</code> puedes que hacer que sea de entrada y salida o solo salida. Tiene que llevarlo durante toda la acción</p><p id="189b4392-0286-8040-856a-eed2a2857fc1" class="">En la variable donde sale tiene que llevar <code>&amp;</code></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182b4392-0286-80f5-bead-f0c8ffa61f74" class="code"><code class="language-C++">void BinDec (int b1, int b2, int b3, int b4, int *dec)
+{
+*dec = b1*1 + b2*2 + b3*4 + b4*8;
+}
+BinDec (a1, a2, a1, a2, &amp;decimal1);</code></pre><p id="191b4392-0286-803f-aa09-d2956b9514f3" class="">Si pones void en vez de variables lo que haces es que solo sea un procedimiento y ya</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="191b4392-0286-801d-88a0-ee2636c093f2" class="code"><code class="language-C">void despejarEntrada(void){
+    while(getchar() != &#x27;\n&#x27;);
+}
+despejarEntrada();</code></pre><p id="189b4392-0286-80b2-83b6-cd8f68762d11" class="">
+</p><hr id="182b4392-0286-801a-b107-ef6d32c41203"/><h1 id="182b4392-0286-8034-8301-c39b3ac272df" class="">Comandos Varios</h1><h2 id="183b4392-0286-809a-9538-c5bd7131b36b" class="">Rand</h2><p id="183b4392-0286-807e-bb63-c8d882cb4e5d" class="">primero inicializamos con <code>srand();</code></p><p id="183b4392-0286-80e3-9de1-f54952019174" class="">Puedes ponen dentro de <code>srand</code> la funcion <code>time</code> para lo que necesitamos la librería <code>#include &lt;time.h&gt;</code></p><p id="183b4392-0286-80a9-9192-d9df542c9eae" class="">Quedaría <code>srand(time(NULL));</code></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="183b4392-0286-80d9-b488-f1bfb0ed33be" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;windows.h&gt;
+#include &lt;time.h&gt;
+int main ()
+{
+    SetConsoleCP(1252);
+    SetConsoleOutputCP(1252);
+    srand(time(NULL));   //creamos una clave para randomizar
+    int numeroSecreto;
+    numeroSecreto=rand()%9+1;   //Randomizamos
+
+    printf(&quot;Tu número secreto es %d\n&quot;,numeroSecreto);
+
+    printf(&quot;Pulse una tecla para contínuar...\n&quot;);
+    getchar();
+    return 0;
+}</code></pre><p id="183b4392-0286-802f-bae8-ec2478ae8bed" class="">randomizamos</p><p id="183b4392-0286-8002-a3c8-f08efbdb9c0a" class=""><code>x=rand()%21+20;</code></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
