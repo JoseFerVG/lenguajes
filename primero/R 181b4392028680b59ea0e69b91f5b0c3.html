@@ -1,0 +1,699 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>R</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="181b4392-0286-80b5-9ea0-e69b91f5b0c3" class="page sans"><header><h1 class="page-title">R</h1><p class="page-description"></p></header><div class="page-body"><p id="181b4392-0286-81aa-b4d4-f9677b0f016e" class="">Creado por José Fernando Vidal García</p><h1 id="181b4392-0286-8027-bc03-ca527579b89c" class="">Crear Arrays</h1><h2 id="181b4392-0286-805c-aac0-df90832bea60" class="">Concatenación (Array común)</h2><p id="181b4392-0286-8029-aa60-c705f7a645de" class=""><code><strong>C(x,y,z)</strong></code> </p><h2 id="181b4392-0286-80b3-a937-f4574d57acd4" class="">Rep (repetir)</h2><h3 id="181b4392-0286-806d-96d7-d856c1807f2b" class="">Que algo se repita tantas veces</h3><div id="181b4392-0286-808a-9a8c-d037e276d010" class="column-list"><div id="f7eaf7dd-b814-402e-9904-fa83d13f82f3" style="width:50%" class="column"><p id="181b4392-0286-801b-bd46-d0c52bacca2c" class=""><code>rep(x,n_veces)</code> </p></div><div id="b359e456-5585-42de-9722-e87b84ce050f" style="width:50%" class="column"><p id="d2fbf551-e27e-43f7-aa83-371161fee0a3" class=""><span style="border-bottom:0.05em solid">Se repite x n veces</span></p></div></div><h3 id="181b4392-0286-8083-91bd-d9c29a69067a" class="">Repetir varias cosas</h3><p id="181b4392-0286-80c7-abdc-decaedd13627" class=""><code>rep(c(&quot;mujer&quot;,&quot;hombre&quot;),c(repetir_X_mujer,repetir_Y_hombre))</code></p><p id="181b4392-0286-8019-bed5-c2f2f72c2988" class="">Repite mujer x veces y hombre y veces</p><h2 id="181b4392-0286-808d-9ab2-ef588a0c383f" class="">Scan (meter muchos valores en terminal)</h2><div id="181b4392-0286-8032-95d2-c2232b426fdc" class="column-list"><div id="0c980c23-3305-4cbb-bab3-3bcb816b99d5" style="width:33.33333333333333%" class="column"><p id="181b4392-0286-807c-b521-d2a06c55a6a5" class=""><code>consola = scan()</code> </p><p id="181b4392-0286-80b6-bac9-e3233ab243fa" class="">
+</p></div><div id="5ddb39d9-cbbc-4989-af31-81ad1c04b499" style="width:33.33333333333333%" class="column"><p id="917b07b4-5b50-4451-9285-1bdfa36d76b1" class=""><code>what=”character”</code> </p><p id="181b4392-0286-80a5-abd0-f370f888be5d" class="">(para especificar que le estas metiendo)</p></div><div id="e4fad9ba-3b46-4554-a7f6-a1509024fb9c" style="width:33.33333333333333%" class="column"><p id="c008b2fc-1a8a-4380-a021-d0b8e09c1f48" class=""><code>sep(”lo_que_separa”)</code></p></div></div><p id="181b4392-0286-80b1-b2ca-ee61b086b7b8" class="">Puedes poner que escaneé un fichero poniendo dentro del paréntesis: <strong>&quot;lenguajes.txt”</strong></p><h1 id="182b4392-0286-8049-8ea1-ddf3f8a444a1" class="">Leer un .dat</h1><p id="182b4392-0286-803f-a7bb-c8ee8b7cf1a5" class=""><code>juegos=read.table(&quot;Juegos.dat&quot;)</code></p><hr id="181b4392-0286-800d-8682-d91b3496d9f5"/><h1 id="181b4392-0286-80d0-b4d3-d277d0584cab" class="">Frecuencias</h1><h2 id="181b4392-0286-80e9-9d78-d497ca5757e8" class="">Absoluta</h2><p id="18ab4392-0286-80fd-978b-ceb8246eaa82" class="">Cuantos hay de algo</p><p id="181b4392-0286-8010-82e9-f684bb00e247" class=""><code>table(gen)</code></p><h2 id="181b4392-0286-8049-bf41-c7b820556f71" class="">Relativa</h2><p id="18ab4392-0286-800a-b2cb-f618bda77a7d" class="">Cuantos hay de algo entre cuantos algos hay</p><p id="181b4392-0286-806a-9846-c5f056a5f643" class=""><code>table(gen)/length</code></p><h2 id="181b4392-0286-80c5-a9c4-c21c4e38d1a3" class="">Acumulada (ir sumando las absolutas)</h2><div id="181b4392-0286-800d-bf51-c385f9b39645" class="column-list"><div id="20e19bcf-5f6e-44df-a7fa-2f1c24bfb1b6" style="width:50%" class="column"><p id="181b4392-0286-806e-aa90-ffb07e9ba04e" class=""><code>cumsum(c(3,2,3,5))</code> </p></div><div id="4c8c4b66-b43a-48b1-955f-02e919e95133" style="width:50%" class="column"><figure id="181b4392-0286-80a5-ad18-fd9e5f59d125" class="image"><a href="image.png"><img style="width:188.90626525878906px" src="image.png"/></a></figure></div></div><h2 id="181b4392-0286-80d6-95b5-ff30da0023c8" class="">Acumulada Relativa  (ir sumando las relativas)</h2><div id="181b4392-0286-8088-9a13-d2c486586dbb" class="column-list"><div id="019b9646-497d-454e-bac3-06108d94fefe" style="width:50%" class="column"><p id="181b4392-0286-800c-a5d2-dd5e9dd2e0f2" class=""><code>cumsum(table(pro)/length(pro))</code></p><p id="181b4392-0286-8025-aefd-eecace5a4b97" class="">Divides entre </p></div><div id="2a9cf45b-5035-4aae-ba05-eee789ec55ba" style="width:50%" class="column"><figure id="181b4392-0286-8030-82d8-f37dc2d057dd" class="image"><a href="image%201.png"><img style="width:280.9895935058594px" src="image%201.png"/></a></figure></div></div><p id="181b4392-0286-80fb-9cc0-ebc76b721ea8" class="">
+</p><hr id="181b4392-0286-8020-be52-d4b44a68cd34"/><h1 id="181b4392-0286-8001-9899-d238bba4687a" class="">Intervalos</h1><h2 id="181b4392-0286-80c4-94af-e1207686ede0" class="">Poner en una lista todos los números entre dos números</h2><div id="181b4392-0286-80a0-ab38-c1f2b32e1747" class="column-list"><div id="c1b79e54-6b04-4974-aac0-eea58ed0dfa0" style="width:50%" class="column"><p id="181b4392-0286-8037-bfd7-c88976a37040" class=""><code>lista = 20:30</code></p></div><div id="0e8cc475-e7ec-44d4-98bd-bdbd4defce97" style="width:50%" class="column"><p id="015671ad-601e-4661-bf25-e98d7f9416b7" class="">Incluye el 20 y el 30</p></div></div><h2 id="181b4392-0286-80bc-8fa7-da5be2778f10" class="">Seq (secuencia)</h2><div id="181b4392-0286-80c4-a049-e2dd87d79861" class="column-list"><div id="181b4392-0286-8095-8a2c-e88e98bc4d40" style="width:100%" class="column"><p id="181b4392-0286-8041-9d13-ff3ffa15d325" class=""><code>bruma = seq(2,8,2)</code> </p></div><div id="181b4392-0286-80b5-b1b1-f178974c2d52" style="width:100%" class="column"><p id="181b4392-0286-80ff-b243-e3fd644418c9" class="">Del 2 al 8 de 2 en 2, no se puede pasar</p></div></div><h2 id="181b4392-0286-8040-812f-cc0a28e5f08c" class="">Ver un intervalo en concreto</h2><p id="181b4392-0286-80ba-a125-cc1e270c4703" class=""><code>usuarioscut=usuarios[usuarios&gt;=65 &amp; usuarios &lt;=80]</code></p><figure id="181b4392-0286-8059-b320-e031de9981d8" class="image"><a href="image%202.png"><img style="width:442.87109375px" src="image%202.png"/></a></figure><h2 id="181b4392-0286-800a-9689-edf49eba7ff9" class="">Cambiar los resultados a intervalos</h2><p id="182b4392-0286-8056-965a-d8a7c0df8e77" class="">ej: <code>internet=cut(internet,breaks=seq(0,90,10))</code> </p><p id="196b4392-0286-808a-af17-cc133d193da5" class="">Si pones <code>labels = c(&quot;ss&quot;,…)</code> pones etiqueta a cada trozo cortado</p><p id="182b4392-0286-8097-b193-d29c989ba7f2" class="">Clasificará cada uno de los números segun en el intervalo en el que estén del 0 al 90 de 10 en 10</p><p id="181b4392-0286-802d-a6d9-f45e13e33e88" class="">
+</p><hr id="181b4392-0286-8052-9699-fc87aed88f29"/><h1 id="181b4392-0286-809a-8786-dee811f7b95e" class="">Diagramas/ Gráficos</h1><h2 id="181b4392-0286-8013-bb7f-d33edf83ad6e" class="">Grafico de barras/ diagrama de barras</h2><p id="181b4392-0286-80d6-a55d-e415207d0d5b" class=""><code>barplot(table(genero))</code> </p><h2 id="181b4392-0286-80ec-89dc-c2371f31291e" class="">Diagrama circular</h2><p id="181b4392-0286-80fd-a0a0-cc8b7dd30017" class=""><code>pie(table(genero)/length(genero))</code></p><figure id="181b4392-0286-80e5-b201-ef1c4982cb8c" class="image"><a href="image%203.png"><img style="width:707.9874877929688px" src="image%203.png"/></a></figure><h2 id="18fb4392-0286-8092-82d0-d862eb29c41d" class="">Histograma</h2><p id="18fb4392-0286-8014-98c3-d9e2a51ea799" class=""><code>hist()</code></p><p id="18fb4392-0286-80d3-9972-cd7ad69a6614" class="">Para elegir los intervalos: <code>hist([Ventas≤10],breaks=c(1,2,3))</code></p><p id="18fb4392-0286-8043-aad7-e417d3343ec4" class="">Si quieres que esten derrados a la derecha poner <code>right=FALSE</code> </p><p id="18fb4392-0286-802a-b483-e7b11486a264" class="">Para incluir el origen <code>inculde.lowest</code></p><hr id="18fb4392-0286-80cc-ae9b-e7fd1b2326b2"/><h1 id="18fb4392-0286-80f4-a69e-cf6d59604df4" class="">Cuantiles</h1><p id="18fb4392-0286-809b-b0c1-e01f532e8916" class="">Se representa con <code>quantail()</code> </p><h2 id="18fb4392-0286-8035-adab-d0dae78d4d74" class="">Rango intercuartilico</h2><p id="18fb4392-0286-80bb-9c00-dd3c5bc966a1" class="">
+</p><h2 id="18fb4392-0286-80f7-ad87-fccc5092b771" class="">Nº Atípico</h2><p id="18fb4392-0286-8080-9fa3-d09bd2a8750a" class="">
+</p><p id="18fb4392-0286-801f-a2f6-d17d22ed1d55" class="">
+</p><h2 id="18fb4392-0286-80ee-8301-d0ccccc1fa81" class="">Visualizarlos</h2><p id="18fb4392-0286-8006-b455-da1ce8b2f9e7" class=""><code>boxplot()</code></p><p id="196b4392-0286-808f-a8b7-e168a5f901a8" class="">
+</p><hr id="196b4392-0286-80dc-bddb-da67a8ac0b69"/><h1 id="196b4392-0286-803d-8c0d-c1541fdff1fd" class="">Tablas</h1><h2 id="196b4392-0286-803f-b563-d9a1f4772f54" class="">Definirla</h2><p id="196b4392-0286-8097-85ac-d4a1f71f1cb4" class=""><code>tabla=xtabs(freq~gen+pelo)</code></p><h2 id="196b4392-0286-804e-9d0f-c1f7a2dddf70" class="">Tablas de frecuencias conjuntas</h2><p id="196b4392-0286-8007-9ee5-f3751e5c3b75" class=""><code>prop.table(table(Ojos,Pelo))</code> </p><div id="196b4392-0286-806b-b9bd-e41a25f8c803" class="column-list"><div id="196b4392-0286-80f4-bd9c-ffcdeb73eb5a" style="width:50%" class="column"><figure id="196b4392-0286-806a-ab87-f79d1d7ef7ee" class="image"><a href="image%204.png"><img style="width:157.96875px" src="image%204.png"/></a></figure></div><div id="196b4392-0286-807c-b0f8-fd8a3601f0a5" style="width:50%" class="column"><figure id="196b4392-0286-8082-be8c-f8a7663f8d68" class="image"><a href="image%205.png"><img style="width:310px" src="image%205.png"/></a></figure></div></div><h2 id="196b4392-0286-809d-898a-d3c735f86f41" class="">tablas de frecuencias condicionadas</h2><p id="196b4392-0286-804b-a8bd-e35b5352e3f2" class=""><code>prop.table(table(Ojos,Pelo),1)</code></p><p id="196b4392-0286-80b0-a83f-f235d19e2354" class="">Con el uno eliges que variable quieres usar para sacar sus frecuencias relativas</p><div id="196b4392-0286-801e-8232-d50e18082a93" class="column-list"><div id="196b4392-0286-806a-9975-cec48b0b101f" style="width:50%" class="column"><figure id="196b4392-0286-80b1-b5c7-f14a159074e1" class="image"><a href="image%204.png"><img style="width:157.96875px" src="image%204.png"/></a></figure></div><div id="196b4392-0286-8010-b034-c433caadb114" style="width:50%" class="column"><figure id="196b4392-0286-8056-afbc-f374a5960f37" class="image"><a href="image%206.png"><img style="width:290.9548645019531px" src="image%206.png"/></a></figure></div></div><h2 id="196b4392-0286-8040-85e7-ee80b3439bdb" class="">Diagrama de barras</h2><div id="196b4392-0286-8095-bbcf-f7b6b6f98551" class="column-list"><div id="196b4392-0286-8099-bcb2-e9ddc2efe64a" style="width:50.00000000000002%" class="column"><p id="196b4392-0286-80b2-90b9-e72e01bd3a4e" class=""><code>barplot(tabla)</code></p><figure id="196b4392-0286-80f5-868a-cd852c37ae66" class="image"><a href="image%207.png"><img style="width:331.97222900390625px" src="image%207.png"/></a></figure></div><div id="196b4392-0286-80e9-9c67-cf989d7250da" style="width:50%" class="column"><p id="196b4392-0286-80b0-8482-cbf7ac514d6b" class="">Si pones <code>barplot(tabla , beside = T)</code> los separa</p><figure id="196b4392-0286-80d1-acfc-e59df72a79af" class="image"><a href="image%208.png"><img style="width:331.97222900390625px" src="image%208.png"/></a></figure></div></div><h2 id="181b4392-0286-8038-8bfd-e9627f287f30" class="">Añadir frecuencias marginales</h2><p id="196b4392-0286-80b4-a644-cbdee63428fb" class=""><code>tabla=addmagins(tabla)</code> </p><p id="196b4392-0286-80a1-b44f-f41ae9f6083c" class="">
+</p><hr id="181b4392-0286-80d2-b13a-f4e964ae35df"/><h1 id="181b4392-0286-8028-b9d5-fe524623e7fd" class="">Comandos básicos</h1><h2 id="181b4392-0286-8099-b8e9-f4eaea7ab0ad" class="">rm (Borrar)</h2><p id="181b4392-0286-80d3-b59e-fc1d8ddd56b5" class=""><code>rm(”nombre variable”)</code></p><h2 id="185b4392-0286-8061-9d1f-f68c7b9d274f" class="">name (copiar solo las etiquetas)</h2><p id="185b4392-0286-8017-8dec-cdc6d3ec6813" class="">se queda solo con las etiquetas</p><h2 id="185b4392-0286-8070-95c6-c65cadc7536d" class="">as.numeric</h2><p id="185b4392-0286-809d-9909-d30ab1be07bd" class="">Se queda solo con los numeros</p><h2 id="18fb4392-0286-806f-8739-ce7a6632f7b1" class="">Breaks</h2><p id="18fb4392-0286-8043-b39c-f2cceaac1613" class="">Sirve para decir que divisiones quieres por ejemplo en los historgramas</p><h2 id="185b4392-0286-8018-9a90-cb59ad58ca3b" class="">Media</h2><p id="185b4392-0286-808f-b18a-d7808c775125" class=""><code>mean()</code></p><h2 id="185b4392-0286-80c7-9353-f15105d26881" class="">Moda</h2><p id="185b4392-0286-807b-b52e-cd84320abbcd" class=""><code>which(table(VentasEU)==max(table(VentasEU)))</code></p><h2 id="18fb4392-0286-805a-aa08-fd594864bc6e" class="">Median</h2><p id="18fb4392-0286-80d9-992f-e5b331b1c518" class=""><code>median()</code> es la mediana</p><h2 id="185b4392-0286-805c-af3d-f6381a85af57" class="">Summary</h2><p id="185b4392-0286-80da-b447-ce2a8dc96f77" class="">Te dice muchos datos como la media o la mediana </p><p id="185b4392-0286-8016-af20-f29cdacf30b6" class=""><code>summary(VentasEU)</code> </p><h2 id="185b4392-0286-8000-bb12-e893c3452240" class="">Resolver ecuaciones</h2><p id="185b4392-0286-8051-8854-fc6d02830f7d" class=""><code>which(table(VentasEU)==max(table(VentasEU)))</code></p><h2 id="181b4392-0286-80ad-9ee3-ffebe833d36f" class="">Asignar una variable</h2><p id="181b4392-0286-8084-ae5b-de863fbff793" class=""><code>a=2</code></p><h2 id="181b4392-0286-8093-abe6-dd04f37d764b" class="">Length</h2><div id="181b4392-0286-801e-8789-c9e044c13065" class="column-list"><div id="067d3af1-4694-423a-9b9b-26b8174d4423" style="width:50%" class="column"><p id="c82e4184-5587-4920-ac1d-c780da67a29d" class=""><code>length(prueba)</code> </p></div><div id="c309ea37-91af-4b79-8f95-90aba690140d" style="width:50%" class="column"><p id="ce4a59fe-5845-40de-ac78-d1867f5854a2" class="">Es el conteo de cuantos elementos hay</p></div></div><h2 id="181b4392-0286-8099-9abd-e8981d44007a" class="">Data.frame (crear una tabla con varios arrays)</h2><div id="181b4392-0286-8053-a343-d93de5372788" class="column-list"><div id="5b7f9bef-34d8-40ac-acac-d3be814a2f70" style="width:50%" class="column"><p id="181b4392-0286-80ce-b84a-e7ca135b496d" class=""><code>Personas = data.frame(peso,nota,sexo)</code> </p><p id="181b4392-0286-80eb-9da9-f890c28d6447" class="">
+</p></div><div id="e6cb3995-b0e5-4189-a2ef-2924e92b76d0" style="width:50%" class="column"><figure id="181b4392-0286-80d9-b4a0-f722953b4b46" class="image"><a href="image%209.png"><img style="width:192px" src="image%209.png"/></a></figure></div></div><h3 id="181b4392-0286-8025-b737-e644cb9bc86c" class="">Buscar variables dentro de un data frame</h3><div id="181b4392-0286-8022-82d7-f5f7d764e62b" class="column-list"><div id="181b4392-0286-8025-bbbd-f667d2f939a6" style="width:100%" class="column"><p id="181b4392-0286-8063-879d-dd21c07e539c" class=""><code>attach(nombre_dataframe)</code></p></div><div id="181b4392-0286-80e6-b67e-deea873d9b22" style="width:100%" class="column"><p id="181b4392-0286-8089-812d-df5f395cb306" class=""><code>detach(nombre_dataframe)</code> (Parar de buscar)</p></div></div><h2 id="181b4392-0286-803c-8ea5-e29170dbca48" class="">Máximo o Mínimo de un Array</h2><div id="181b4392-0286-8047-9fe8-d97508b88179" class="column-list"><div id="c6231f65-c29d-4746-ab5a-db5e854fceff" style="width:50%" class="column"><p id="69ac10bb-2b72-46d8-b56b-ea2ca05c9ccd" class=""><code>max(lista)</code> </p></div><div id="e98e8ef9-2120-4ea5-b64a-9c20b052d6d4" style="width:50%" class="column"><p id="7b11b732-ef3c-4769-b593-3469b9da2038" class=""><code>min(lista)</code></p></div></div><div id="181b4392-0286-801f-b9f3-e226a28b6dba" class="column-list"><div id="181b4392-0286-80f3-8913-ec6bd26b3cb8" style="width:100%" class="column"><h2 id="3923f3db-167c-4b31-9ce9-cc3b01fe5d80" class="">sum (Sumar todo)</h2><p id="181b4392-0286-800a-a6fd-e85cd9cd84fe" class=""><code>sum(brum)</code></p></div><div id="181b4392-0286-80be-9278-e59e37f8dd6d" style="width:100%" class="column"><h2 id="181b4392-0286-802d-936a-f8f3a175326a" class="">prod (Multiplicar todo)</h2><p id="181b4392-0286-806d-b880-c9d729b71804" class=""><code>prod(brum)</code></p></div></div><h2 id="4d1db926-27da-4329-b12e-dd120bb568d2" class="">short</h2><p id="181b4392-0286-800a-b0b1-cac1ccb05712" class="">Ordena la lista<br/><br/><code>sort(list)</code> Si le metes <code>,decreasing=T</code> será decreciente</p><h2 id="18fb4392-0286-80ef-a3bd-d966b3e8354c" class="">cbind</h2><p id="18fb4392-0286-8076-92cf-f75d08207294" class="">comparar dos variables</p><h2 id="181b4392-0286-8098-9760-de9cf54e9b92" class="">Unique</h2><div id="181b4392-0286-808e-8158-c6f9878ef928" class="column-list"><div id="2a6bb171-1ab6-49f6-bd7b-1613e7b848d6" style="width:50%" class="column"><p id="9352f580-a521-43cb-800d-bef66c89b033" class=""><code>unique(lita2)</code> </p></div><div id="02b79c25-0833-4b4c-8b58-ec0078b3ec2b" style="width:50%" class="column"><p id="67b35778-034f-467f-ba36-0897d1cebaa8" class="">Quita los repetidos</p></div></div><h2 id="181b4392-0286-8060-a480-c43a6f2f1cc0" class="">Matriz</h2><div id="181b4392-0286-8041-9761-e6b900b1373e" class="column-list"><div id="1f9038f5-a991-433a-a89b-4f27108ceca0" style="width:50%" class="column"><p id="181b4392-0286-8024-a8f4-cd04f3f45006" class=""><code>matrix(array, filas, columnas)</code></p></div><div id="d4a98410-ce75-4cbe-9d6d-d697e9f859e9" style="width:50%" class="column"><p id="eb7365bd-e70c-4d49-ab3a-8d9a44e5c1cc" class="">Rellena columna por columna</p></div></div><p id="185b4392-0286-80f2-84a3-ca9983d3549a" class="">
+</p><hr id="185b4392-0286-80a3-b7db-c2f98bbc61ce"/><h1 id="185b4392-0286-805f-9ace-fcc13ea3fd35" class="">Varianza</h1><p id="185b4392-0286-80a0-9ed7-c731f6d5716f" class="">La varianza es hacer a cada uno de los terminoss una resta por la media aritmetica y elevarlos cada uno al cuadrado, despues divides toda esa suma entre cuantos numeros habia</p><p id="19db4392-0286-8023-9430-e8121e762477" class=""><code>cov(X,x)</code> </p><h2 id="185b4392-0286-802b-83e0-ee8eb05927fd" class="">Coeficiente de variacion</h2><p id="185b4392-0286-8021-b98e-cff297af4114" class="">desviacion tipica entre media</p><h2 id="185b4392-0286-8084-96db-f100eb2689f1" class="">Cuasi-varianza</h2><p id="185b4392-0286-8058-a405-f0d105b1ebb4" class="">es lo mismo pero entre n-1</p><p id="185b4392-0286-8023-a8a5-d17f9331013b" class="">se escribe <code>var()</code></p><h3 id="185b4392-0286-8029-b954-f81ed97441f1" class="">Cuasi desviación típica</h3><p id="185b4392-0286-8066-a71f-ecb74fb63658" class="">Es lo mismo pero en raíz cuadrada</p><h1 id="19db4392-0286-80dc-8e20-eadbf6bedf75" class="">Covarianza</h1><p id="19db4392-0286-807f-b90e-e7fd31eb73ca" class="">Si es positiva aumentan las dos si es negativa una sube y la otra baja</p><p id="19db4392-0286-8095-a894-c2ea0ab6981c" class=""><code>cov(X,Y)</code></p><p id="185b4392-0286-809c-b1b3-fb1b074b3721" class="">
+</p><h1 id="185b4392-0286-8027-84d8-d442d9e81e9d" class="">Desviación</h1><p id="185b4392-0286-807b-9383-d7444ffd980a" class="">
+</p><p id="185b4392-0286-80df-a9ff-dd6a69726e8c" class="">
+</p><h1 id="185b4392-0286-800e-8cfb-e69d5553e562" class="">Tipificación</h1><p id="18fb4392-0286-80e6-937f-f646f19e9980" class="">
+</p><h1 id="18fb4392-0286-80f5-82aa-f81f7307bef5" class="">Coeficientes de correlación y determinación</h1><figure id="19db4392-0286-80ff-8a37-c74f4dc61411" class="image"><a href="image%2010.png"><img style="width:709.9861450195312px" src="image%2010.png"/></a></figure><p id="19db4392-0286-8061-8eea-c179a101871f" class="">cor(X, Y )</p><p id="19db4392-0286-8035-9341-e6c6f9a2ea39" class="">r^2= cor(X, Y )*cor(X, Y )</p><h1 id="19db4392-0286-8048-982b-cd4d4c30d0d0" class="">Recta de Regresión</h1><p id="19db4392-0286-807a-b5d5-e5f23a6ba2c1" class=""><code>lm(formula = Y ~ X)</code></p><figure id="19db4392-0286-80dd-9505-dea8cb2b73e4" class="image"><a href="image%2011.png"><img style="width:709.9722290039062px" src="image%2011.png"/></a></figure><h2 id="185b4392-0286-8006-966b-d299478d94a0" class="">Media de clases</h2><p id="18fb4392-0286-8012-956f-dcf76b3c0739" class="">El punto medio de los intervalos por la frecuencia relativa de cada uno</p><p id="19db4392-0286-803f-bfbc-c34432af79d1" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
