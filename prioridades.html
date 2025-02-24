@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk 2077 Priority Pyramid</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .pyramid-level {
+            position: relative;
+            margin: 15px auto;
+            padding: 20px;
+            background: linear-gradient(90deg, #000 0%, #1a1a1a 100%);
+            border: 2px solid #fcee0a;
+            clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
+            transition: all 0.3s ease;
+        }
+
+        .pyramid-level:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #fcee0a33;
+        }
+
+        .pyramid-level:hover::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #fcee0a22 0%, transparent 100%);
+            animation: glitch 1s infinite;
+        }
+
+        .level-1 { width: 100%; }
+        .level-2 { width: 85%; }
+        .level-3 { width: 70%; }
+        .level-4 { width: 55%; }
+        .level-5 { width: 40%; }
+
+        .level-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .level-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #fcee0a;
+            text-shadow: 2px 2px #ff006677;
+            letter-spacing: 2px;
+        }
+
+        .level-description {
+            color: #00ffff;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+
+        .level-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #ff0066;
+            text-shadow: 2px 2px #fcee0a77;
+        }
+
+        @keyframes glitch {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-1px); }
+            100% { transform: translateX(0); }
+        }
+
+        .cyber-tag {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #ff0066;
+            padding: 2px 10px;
+            font-size: 0.8em;
+            transform: skew(-20deg);
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            .pyramid-level {
+                padding: 15px;
+            }
+            .level-title {
+                font-size: 1.2em;
+            }
+            .level-description {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pyramid-level level-5">
+            <div class="cyber-tag">CRITICAL</div>
+            <div class="level-content">
+                <div class="level-info">
+                    <div class="level-title">APEX PRIORITY</div>
+                    <div class="level-description">Maximum System Override</div>
+                </div>
+                <div class="level-number">1</div>
+            </div>
+        </div>
+
+        <div class="pyramid-level level-4">
+            <div class="cyber-tag">HIGH</div>
+            <div class="level-content">
+                <div class="level-info">
+                    <div class="level-title">PRIME DIRECTIVE</div>
+                    <div class="level-description">Core Protocol Execution</div>
+                </div>
+                <div class="level-number">2</div>
+            </div>
+        </div>
+
+        <div class="pyramid-level level-3">
+            <div class="cyber-tag">MEDIUM</div>
+            <div class="level-content">
+                <div class="level-info">
+                    <div class="level-title">NEURAL NETWORK</div>
+                    <div class="level-description">Data Processing Matrix</div>
+                </div>
+                <div class="level-number">3</div>
+            </div>
+        </div>
+
+        <div class="pyramid-level level-2">
+            <div class="cyber-tag">LOW</div>
+            <div class="level-content">
+                <div class="level-info">
+                    <div class="level-title">SYSTEM CORE</div>
+                    <div class="level-description">Base Operations</div>
+                </div>
+                <div class="level-number">4</div>
+            </div>
+        </div>
+
+        <div class="pyramid-level level-1">
+            <div class="cyber-tag">BASE</div>
+            <div class="level-content">
+                <div class="level-info">
+                    <div class="level-title">FOUNDATION</div>
+                    <div class="level-description">System Maintenance</div>
+                </div>
+                <div class="level-number">5</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
