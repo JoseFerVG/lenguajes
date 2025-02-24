@@ -1,28 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="utf−8">
- <title>José Fernando Vidal García</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>José Fernando Vidal García - Programming Hub</title>
+  <style>
+    :root {
+      --neon-blue: #00f3ff;
+      --neon-purple: #9d4edd;
+      --dark-bg: #0a0a1f;
+      --card-bg: rgba(16, 16, 41, 0.9);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--dark-bg);
+      color: white;
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Matrix-like background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                  repeating-linear-gradient(0deg, 
+                    transparent 0, 
+                    transparent 50px, 
+                    rgba(0, 243, 255, 0.1) 50px, 
+                    rgba(0, 243, 255, 0.1) 51px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
+
+    .github-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      color: var(--neon-blue);
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid var(--neon-blue);
+      transition: all 0.3s ease;
+    }
+
+    .github-link:hover {
+      background: var(--neon-blue);
+      color: var(--dark-bg);
+      box-shadow: 0 0 15px var(--neon-blue);
+      transform: translateY(-2px);
+    }
+
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .language-card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(0, 243, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .language-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+      border-color: var(--neon-blue);
+    }
+
+    .language-card a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: block;
+    }
+
+    .language-card a::before {
+      content: "<";
+      color: var(--neon-blue);
+      margin-right: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .language-card a::after {
+      content: "/>";
+      color: var(--neon-blue);
+      margin-left: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .language-card:hover a::before,
+    .language-card:hover a::after {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .languages-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Resumenes de lenguajes para la Uni</h1>
-  <a href="https://github.com/JoseFerVG/lenguajes" target="_blank">Repositorio</a>
-  <br>
-  <br>
-  <a href="primero/C/">C</a>
-  <br>
+  <div class="container">
+    <header>
+      <h1>Resúmenes de Lenguajes para la Uni</h1>
+      <a href="https://github.com/JoseFerVG/lenguajes" target="_blank" class="github-link">
+        Ver Repositorio en GitHub
+      </a>
+    </header>
 
-  <br>
-  <a href="primero/C++/">C++</a>
-  <br>
+    <main class="languages-grid">
+      <div class="language-card">
+        <a href="primero/C/">C</a>
+      </div>
 
-  <br>
-  <a href="primero/R/">R</a>
-  <br>
-  
-  <br>
-  <a href="primero/MIPS/">MIPS</a>
-  <br>
+      <div class="language-card">
+        <a href="primero/C++/">C++</a>
+      </div>
 
+      <div class="language-card">
+        <a href="primero/R/">R</a>
+      </div>
+
+      <div class="language-card">
+        <a href="primero/MIPS/">MIPS</a>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
